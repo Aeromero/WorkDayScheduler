@@ -1,11 +1,11 @@
 $(function () {});
   
-/* Declare Variables */
+/* Date Variables */
 var today = moment().format("dddd, MMMM Do");
 
 var now = moment().format("H A");
 
-/* planWorkday entries for each hour of the workday */
+/* Hour time slots */
 var planWorkday = [
   { time: "9 AM", event: "" },
   { time: "10 AM", event: "" },
@@ -18,16 +18,16 @@ var planWorkday = [
   { time: "5 PM", event: "" },
 ];
 
-/* Local Storage check */
+/* information storage */
 var workEvents = JSON.parse(localStorage.getItem("workDay"));
 if (workEvents) {
   planWorkday = workEvents;
 }
 
-/* Current Day */
+/* current day */
 $("#currentDay").text(today);
 
-/* Create rows */
+/* time slot rows */
 planWorkday.forEach(function(timeBlock, index) {
 	var timeLabel = timeBlock.time;
 	var blockColor = colorRow(timeLabel);
@@ -46,7 +46,7 @@ planWorkday.forEach(function(timeBlock, index) {
 	$(".container").append(row);
 });
 
-/* Color rows based on current time */
+/* Time slot colors */
 function colorRow(time) {
 	var planNow = moment(now, "H A");
 	var planEntry = moment(time, "H A");
@@ -74,6 +74,6 @@ $(".saveBtn").on("click", function() {
 	);
 	planWorkday[blockID].event = userEntry;
 
-	/* Set local storage */
+	/* local storage */
 	localStorage.setItem("workDay", JSON.stringify(planWorkday));
 });
