@@ -1,6 +1,9 @@
 $(function () {});
   
+/* Date Variables */
+var today = moment().format("dddd, MMMM Do");
 
+var now = moment().format("H A");
 
 /* Hour time slots */
 var planWorkday = [
